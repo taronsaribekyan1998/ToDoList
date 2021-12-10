@@ -13,9 +13,7 @@ class ToDoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.leftBarButtonItem = editButtonItem
-        
+                
         if let savedToDos = ToDo.loadToDos() {
             todos = savedToDos
             } else {
@@ -35,20 +33,4 @@ class ToDoTableViewController: UITableViewController {
         cell.textLabel?.text = todo.title
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            todos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
-    @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
-        
-    }
-    
 }
