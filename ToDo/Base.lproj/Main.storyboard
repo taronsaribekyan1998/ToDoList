@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--My To-Do's-->
         <scene sceneID="bdK-zh-ynk">
             <objects>
                 <tableViewController id="fIR-ng-36c" customClass="ToDoTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,11 +31,62 @@
                             <outlet property="delegate" destination="fIR-ng-36c" id="kuK-Ky-5re"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="TV4-td-Oof"/>
+                    <navigationItem key="navigationItem" title="My To-Do's" id="TV4-td-Oof">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PQc-iu-Xj7">
+                            <connections>
+                                <segue destination="W3q-5o-UE1" kind="presentation" id="qeq-O2-drh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfb-sZ-s1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="269" y="79"/>
+        </scene>
+        <!--New ToDO-->
+        <scene sceneID="9C6-U3-tqe">
+            <objects>
+                <tableViewController id="WPF-OG-JXV" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="6yW-d4-pQh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BGh-AK-xAv">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BGh-AK-xAv" id="rp8-pK-Q2Z">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WPF-OG-JXV" id="PZE-rR-xma"/>
+                            <outlet property="delegate" destination="WPF-OG-JXV" id="yEt-Vd-BUZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New ToDO" largeTitleDisplayMode="never" id="Bs8-pU-00K"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkB-JH-qc9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2007" y="78"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jRB-Hn-l4Y">
+            <objects>
+                <navigationController id="W3q-5o-UE1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wvl-7v-gsp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WPF-OG-JXV" kind="relationship" relationship="rootViewController" id="lnk-gb-sU8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3vI-Ii-1ZB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1113" y="78"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uKL-8I-Xgm">
