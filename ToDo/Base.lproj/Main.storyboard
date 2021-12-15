@@ -46,7 +46,7 @@
         <!--New ToDO-->
         <scene sceneID="9C6-U3-tqe">
             <objects>
-                <tableViewController id="WPF-OG-JXV" sceneMemberID="viewController">
+                <tableViewController id="WPF-OG-JXV" customClass="ToDoDetailTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="6yW-d4-pQh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,11 +73,18 @@
                                                             <state key="selected" image="checkmark.circle.fill" catalog="system">
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="isCompleteButtonTapped:" destination="WPF-OG-JXV" eventType="touchUpInside" id="WUf-79-TA8"/>
+                                                            </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EqO-Yh-QEb">
                                                             <rect key="frame" x="27.5" y="0.0" width="346.5" height="38"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="returnPressed:" destination="WPF-OG-JXV" eventType="primaryActionTriggered" id="dEM-gx-4jH"/>
+                                                                <action selector="textEditingChanged:" destination="WPF-OG-JXV" eventType="editingChanged" id="lCV-gS-hpR"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
@@ -128,8 +135,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="6pZ-JM-ELJ">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="6pZ-JM-ELJ">
                                                     <rect key="frame" x="20" y="11" width="374" height="194"/>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="WPF-OG-JXV" eventType="primaryActionTriggered" id="728-oc-jtL"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -188,6 +198,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateLabel" destination="zl1-Lg-qcm" id="oCi-zb-L4o"/>
+                        <outlet property="dueDatePickerView" destination="6pZ-JM-ELJ" id="9i7-Eg-1LB"/>
+                        <outlet property="isCompleteButton" destination="fXl-Zi-KJK" id="8q1-Dr-XJf"/>
+                        <outlet property="notesTextView" destination="6fz-gw-JNu" id="nAQ-1z-ads"/>
+                        <outlet property="saveButton" destination="X1Y-Af-se1" id="KAM-z1-yd1"/>
+                        <outlet property="titleTextField" destination="EqO-Yh-QEb" id="gWu-8E-ZIR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkB-JH-qc9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="djQ-IB-LJS" userLabel="Exit" sceneMemberID="exit"/>
