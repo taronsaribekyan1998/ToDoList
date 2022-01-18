@@ -73,6 +73,7 @@ class ToDoTableViewController: UITableViewController {
         
         let detailController = ToDoDetailTableViewController(coder: coder)
         detailController?.todo = todos[indexPath.row]
+        
         return detailController
     }
 }

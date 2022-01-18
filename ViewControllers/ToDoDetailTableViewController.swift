@@ -32,7 +32,9 @@ class ToDoDetailTableViewController: UITableViewController {
             isCompleteButton.isSelected = todo.isComplete
             dueDatePickerView.date = todo.dueDate
             notesTextView.text = todo.notes
-        } else { dueDatePickerView.date = Date().addingTimeInterval(24*60*60) }
+        } else {
+            dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
+        }
         
         updateDueDateLabel(date: dueDatePickerView.date)
         updateSaveButtonState()
@@ -93,6 +95,13 @@ class ToDoDetailTableViewController: UITableViewController {
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
         
-        todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        if todo == nil {
+            todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        } else {
+            todo?.title = title
+            todo?.isComplete = isComplete
+            todo?.dueDate = dueDate
+            todo?.notes = notes
+        }
     }
 }
