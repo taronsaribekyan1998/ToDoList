@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+final class ToDoTableViewController: UITableViewController {
     
     var todos = [ToDo]()
     
@@ -41,9 +41,10 @@ class ToDoTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit
-                            editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath:
-                            IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath:
+IndexPath) {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
