@@ -7,7 +7,18 @@
 
 import UIKit
 
-final class ToDoTableViewController: UITableViewController {
+final class ToDoTableViewController: UITableViewController , ToDoCellDelegate {
+    
+    func checkMarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete.toggle()
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
+        }
+    }
+    
     
     var todos = [ToDo]()
     
@@ -23,16 +34,20 @@ final class ToDoTableViewController: UITableViewController {
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as? ToDoCell
+        else { fatalError() }
         
         let todo = todos[indexPath.row]
-        cell.textLabel?.text = todo.title
+        cell.isCompleteButton.isSelected = todo.isComplete
+        cell.titleLabel.text = todo.title
+        
+        cell.delegate = self
+        
         return cell
     }
     
@@ -44,10 +59,11 @@ final class ToDoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath:
-IndexPath) {
+                            IndexPath) {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
         }
     }
     
@@ -66,6 +82,7 @@ IndexPath) {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
+        ToDo.saveToDos(todos)
     }
     
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {

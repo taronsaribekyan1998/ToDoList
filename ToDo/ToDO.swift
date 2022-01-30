@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct ToDo: Equatable {
+struct ToDo: Equatable, Codable {
     let id = UUID()
     var title: String
     var isComplete: Bool
@@ -17,8 +17,20 @@ struct ToDo: Equatable {
         return lhs.id == rhs.id
     }
     
+    static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    static let archiveURL = documentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
+    
+    static func saveToDos(_ todos: [ToDo]) {
+        let propertyListEncoder = PropertyListEncoder()
+        let codedNotes = try? propertyListEncoder.encode(todos)
+        try? codedNotes?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
     static func loadToDos() -> [ToDo]? {
-        return nil
+        guard let codedToDos = try? Data(contentsOf: archiveURL) else { return nil }
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode(Array<ToDo>.self, from: codedToDos)
     }
     
     static func loadSampleToDos() -> [ToDo] {
